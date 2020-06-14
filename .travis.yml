@@ -1,0 +1,20 @@
+# sudo: false
+language: node_js
+node_js:
+  - 10 # use nodejs v10 LTS
+cache: npm
+branches:
+  only:
+    - page # build blog branch only
+script:
+  - hexo generate # generate static files
+deploy:
+  provider: pages
+  cleanup: true
+  skip_cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
+  target_branch: master
+  on:
+    branch: page
+  local-dir: public
